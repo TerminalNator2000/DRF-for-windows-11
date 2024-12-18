@@ -196,6 +196,6 @@ You should see JSON output for the users in your system.
 
 ---
 
-Congratulations! You've successfully set up a Django REST Framework project with PowerShell and VS Code on Windows 11. Let me know if you need further assistance or have questions! 😊
+
 
 
