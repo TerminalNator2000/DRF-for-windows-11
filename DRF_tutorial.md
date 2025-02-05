@@ -7,14 +7,18 @@ This guide will walk you through creating a simple API that allows admin users t
 ## **Project Setup**
 
 ### 1. Create the Project Directory
+
 Open PowerShell and run the following commands:
+
 ```powershell
 mkdir mytutorial
 cd mytutorial
 ```
 
 ### 2. Set Up a Virtual Environment
+
 Create and activate a virtual environment:
+
 ```powershell
 python -m venv env
 .\env\Scripts\activate
@@ -23,19 +27,25 @@ python -m venv env
 You should now see `(env)` at the start of your terminal prompt, indicating the virtual environment is active.
 
 ### 3. Install Dependencies
+
 Install Django and Django REST Framework:
+
 ```powershell
 pip install django djangorestframework
 ```
 
 ### 4. Create a Django Project
+
 Create a new Django project named `mytutorial` in the current directory:
+
 ```powershell
 django-admin startproject mytutorial .
 ```
 
 ### 5. Create an App
+
 Navigate into the project directory and create a new app called `quickstart`:
+
 ```powershell
 cd mytutorial
 django-admin startapp quickstart
@@ -43,8 +53,8 @@ cd ..
 ```
 
 Your project structure should now look like this:
-```
-.
+
+```powershell
 ./mytutorial
 ./mytutorial/asgi.py
 ./mytutorial/__init__.py
@@ -68,27 +78,35 @@ Your project structure should now look like this:
 ## **Database Initialization**
 
 ### 1. Migrate the Database
+
 Run the following command to set up the database:
+
 ```powershell
 python manage.py migrate
 ```
 
 ### 2. Create a Superuser
+
 Create an admin user for authentication:
+
 ```powershell
 python manage.py createsuperuser --username admin --email admin@example.com
 ```
+
 Follow the prompts to set a password.
 
 ---
 
 ## **Define Serializers**
+
 Create a new file named `serializers.py` in the `quickstart` app directory:
+
 ```powershell
 ni .\quickstart\serializers.py
 ```
 
 Add the following code to `serializers.py`:
+
 ```python
 from django.contrib.auth.models import Group, User
 from rest_framework import serializers
@@ -107,7 +125,9 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
 ---
 
 ## **Create Views**
+
 Open `views.py` in the `quickstart` app directory and add the following code:
+
 ```python
 from django.contrib.auth.models import Group, User
 from rest_framework import permissions, viewsets
@@ -134,7 +154,9 @@ class GroupViewSet(viewsets.ModelViewSet):
 ---
 
 ## **Configure URLs**
+
 Edit `urls.py` in the `mytutorial` directory:
+
 ```python
 from django.urls import include, path
 from rest_framework import routers
@@ -154,7 +176,9 @@ urlpatterns = [
 ---
 
 ## **Add Pagination**
+
 Edit `settings.py` in the `mytutorial` directory to enable pagination:
+
 ```python
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
@@ -163,6 +187,7 @@ REST_FRAMEWORK = {
 ```
 
 Also, add `rest_framework` to the `INSTALLED_APPS` list:
+
 ```python
 INSTALLED_APPS = [
     ...
@@ -175,19 +200,25 @@ INSTALLED_APPS = [
 ## **Test the API**
 
 ### 1. Run the Development Server
+
 Start the server:
+
 ```powershell
 python manage.py runserver
 ```
 
 ### 2. Access the API
+
 - **In the browser**: Visit [http://127.0.0.1:8000/users/](http://127.0.0.1:8000/users/).
 - **Using `httpie`**:
+
    ```powershell
    pip install httpie
    http -a admin http://127.0.0.1:8000/users/
    ```
+
 - **Using `curl`**:
+
    ```powershell
    curl -u admin -H "Accept: application/json; indent=4" http://127.0.0.1:8000/users/
    ```
@@ -195,7 +226,6 @@ python manage.py runserver
 You should see JSON output for the users in your system.
 
 ---
-
 
 
 
